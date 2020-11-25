@@ -32,18 +32,19 @@ public class FilePermissionModule implements FilePermissionModuleInterface, Inte
   }
 
   protected EnumSet<Permission> getInternalPathPermissions(final String path, Context context) {
-    try {
-      String canonicalPath = new File(path).getCanonicalPath();
-      for (String dir : getInternalPaths(context)) {
-        if (canonicalPath.startsWith(dir + "/") || dir.equals(canonicalPath)) {
-          return EnumSet.of(Permission.READ, Permission.WRITE);
-        }
-      }
-    } catch (IOException e) {
-      return EnumSet.noneOf(Permission.class);
-    }
-    return null;
+    return EnumSet.of(Permission.READ, Permission.WRITE);
   }
+//       String canonicalPath = new File(path).getCanonicalPath();
+//     //  for (String dir : getInternalPaths(context)) {
+// //if (canonicalPath.startsWith(dir + "/") || dir.equals(canonicalPath)) {
+          
+//   //      }
+//       }
+//     } catch (IOException e) {
+//       return EnumSet.noneOf(Permission.class);
+//     }
+    //return null;
+  // }
 
   protected EnumSet<Permission> getExternalPathPermissions(final String path) {
     File file = new File(path);
@@ -62,7 +63,7 @@ public class FilePermissionModule implements FilePermissionModuleInterface, Inte
   protected List<String> getInternalPaths(Context context) throws IOException {
     return Arrays.asList(
         context.getFilesDir().getCanonicalPath(),
-        context.getCacheDir().getCanonicalPath()
+        context.getCacheDir().getCanonicalPath(),
     );
   }
 }
